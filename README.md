@@ -26,9 +26,7 @@ We welcome contributions from the developer community! Whether you have ideas fo
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
 
-We would like to express our gratitude to all contributors and the open-source community for their support and collaboration on this project. Your efforts make it possible for developers, both new and experienced, to learn and grow in the world of web development.
 
 Happy coding! 🚗🔍👨‍💻
 
