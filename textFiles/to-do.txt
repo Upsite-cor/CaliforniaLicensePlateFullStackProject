@@ -1,0 +1,14 @@
+patches:
+fixed the await bug where the server would get undefined data from the database if webscraping.
+uses mongodb to grab data sometimes
+
+Bugs-to-fix:
+makesure that it can tell if it the car does not exist
+
+
+
+1. change your path file to webdraft5 for output.txt 
+2. Send the data to the displayDataPage
+3. If it does work then send the data to the front end
+
+3. THEN WE DONE BOISSS!!

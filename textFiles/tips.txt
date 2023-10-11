@@ -1,0 +1,1 @@
+Await- if you're dealing with async stuff and want some async stuff to act sync make sure to use the await keyword. 

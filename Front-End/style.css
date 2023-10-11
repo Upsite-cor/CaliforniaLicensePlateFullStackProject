@@ -1,0 +1,42 @@
+h1.LPFh1{
+    text-align: center;
+   position:relative;
+    bottom:100px;
+    right:230px;
+    font-size:40px;
+}
+
+header{
+    background-color:red;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    position: relative;
+    bottom:8px;
+    margin: 0%;
+    right:8px;
+    width:102%
+}
+
+#Lnumber{
+    height:50px;
+    width: 700px;
+    position:relative;
+    top:170px
+}
+
+label.LPN{
+ position:relative;
+ top:100px;
+ left:100px;
+ font-size:30px;
+}
+
+
+#search{
+    position:relative;
+    left:1027px;
+    top: 128px;
+    height: 43px;
+    width: 222px;
+    font-size: 20px;
+}
