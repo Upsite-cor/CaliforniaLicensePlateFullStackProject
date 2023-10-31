@@ -12,7 +12,7 @@ var fs = require('fs');
 var LPnumber;
 
 
-//main('9DXP329');
+main('9DXP329');
 
 function main(num){
     LPnumber = num;
@@ -88,7 +88,7 @@ async function start(){
             return false;
         }
         else{
-            return await processData(LPnumber);
+            return await processData(LPnumber); //inserts data into mongoDB
             
         }
 

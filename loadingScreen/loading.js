@@ -5,8 +5,7 @@ function delay(ms) {
   async function yourFunction() {
     await delay(20000);
     document.getElementsByTagName('h1')[0].innerHTML = 'DONE';
-    window.location.href = "http://localhost:3000/displayData";
+    window.location.href = "http://localhost:3000";
   }
-  
   yourFunction();
   

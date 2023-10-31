@@ -40,17 +40,24 @@ app.all('/loadData', (req,res)=>{
     res.sendFile(path.join(pathdata));
 })
 
-
+/*
 app.all('/displayData', (req,res)=>{
     var displayDataPath  = "/Users/bryan/Documents/seniorProj/webDraft5/LicensePlateLookup/displayData/displayData.html";
     res.sendFile(path.join(displayDataPath));
 
 })
+*/
 
 
-app.get('/api/cars',(req,res)=>{
+
+
+
+var cars = router.get('/api',(req,res)=>{
     res.json(carDescription);
 })
+
+app.use('/api/cars', cars)
+
 
 
 app.post('/upload', async (req,res)=>{
@@ -58,8 +65,6 @@ app.post('/upload', async (req,res)=>{
     var licenseNumber = req.body.Lnumber;
     carDescription =  await findCar(licenseNumber);
     console.log('app.post starting to look for carDescription: ', carDescription)
-   
-
     //this returns a true of false statement
     //If there is a value that is true then the vehicle is found
     //if it is a false then the vehicles is no where to be found
@@ -68,7 +73,6 @@ app.post('/upload', async (req,res)=>{
 async function findCar(licenseNumber){
     var data;
     data = await findData(licenseNumber);
-        //console.log(data);
         if(data == false){
             return 'data not found';
         }
@@ -79,5 +83,7 @@ async function findCar(licenseNumber){
 }
 
 
-app.listen(3000);
-console.log("The server is listening on port 3000");
+app.listen(4000);
+console.log("The server is listening on port 4000");
+
+module.exports = router;

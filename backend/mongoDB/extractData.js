@@ -17,6 +17,8 @@ async function run(LPnum) {
           };
          // Find and return the document
          const filter = { "licensePlate": `${LPnum}` };
+         const updateAge = {$set: {"age":"old"}};
+         const result = await col.updateOne(filter, updateAge);
          const document = await col.findOne(filter, options);
          var doc = JSON.stringify(document);
          //console.log("Document found:\n" + doc);
