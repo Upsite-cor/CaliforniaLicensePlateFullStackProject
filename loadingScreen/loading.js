@@ -1,11 +1,12 @@
-setTimeout(()=>{
-document.getElementsByTagName('h1')[0].innerHTML = 'DONE';
-
-window.location.href = "http://localhost:3000/displayData";
-
-
-},20000)
-
-setInterval(()=>{
-
-})
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  
+  async function yourFunction() {
+    await delay(20000);
+    document.getElementsByTagName('h1')[0].innerHTML = 'DONE';
+    window.location.href = "http://localhost:3000/displayData";
+  }
+  
+  yourFunction();
+  

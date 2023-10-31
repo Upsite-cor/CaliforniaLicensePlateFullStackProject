@@ -6,7 +6,7 @@ fetch('/api/cars')
 .then(response =>response.json())
 .then(car=>{
     carInfo = car;
-    carInfo = JSON.parse(carInfo);
+    carInfo = JSON.parse(carInfo); //okay so only use this IF and ONLY IF your data is in mongoDB
     displayCarInfoHTML(carInfo)
     displayCSS(carInfo)
 })
