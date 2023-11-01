@@ -5,6 +5,11 @@ const express = require('express');
 const router = express.Router();
 const {main:findData} = require('../backend/js/main')
 const app = express(); //creates applicaiton
+
+
+
+
+
 var carDescription;
 app.use(cors());
 app.use(express.json());
@@ -40,23 +45,12 @@ app.all('/loadData', (req,res)=>{
     res.sendFile(path.join(pathdata));
 })
 
-/*
+
 app.all('/displayData', (req,res)=>{
     var displayDataPath  = "/Users/bryan/Documents/seniorProj/webDraft5/LicensePlateLookup/displayData/displayData.html";
     res.sendFile(path.join(displayDataPath));
 
 })
-*/
-
-
-
-
-
-var cars = router.get('/api',(req,res)=>{
-    res.json(carDescription);
-})
-
-app.use('/api/cars', cars)
 
 
 
@@ -65,6 +59,8 @@ app.post('/upload', async (req,res)=>{
     var licenseNumber = req.body.Lnumber;
     carDescription =  await findCar(licenseNumber);
     console.log('app.post starting to look for carDescription: ', carDescription)
+
+    //maybe I should add react thing here
     //this returns a true of false statement
     //If there is a value that is true then the vehicle is found
     //if it is a false then the vehicles is no where to be found

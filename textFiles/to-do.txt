@@ -3,6 +3,10 @@ fixed the await bug where the server would get undefined data from the database 
 uses mongodb to grab data sometimes
 
 Bugs-to-fix:
+1. inside the callDB.js file we aren't getting our data from mongoDB find out why
+
+
+TODO:
 1. if the car age is old in mongoDB we run the data faster
 2. If the car age is new in mongoDB we run the data a tad slower because we need to get the data
 3. Now we need to fetch the data from mongoDB in our react app.
@@ -14,3 +18,10 @@ Bugs-to-fix:
 3. If it does work then send the data to the front end
 
 3. THEN WE DONE BOISSS!!
+
+
+
+PORTS
+Home port: 4000
+React port: 3000
+DB port: 5000
