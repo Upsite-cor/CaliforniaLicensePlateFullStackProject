@@ -2,7 +2,7 @@
 
 console.log('fetching')
 var carInfo;
-fetch('/api/cars')
+fetch('http://localhost:3000/api/cars') //okay so this is my api
 .then(response =>response.json())
 .then(car=>{
     carInfo = car;

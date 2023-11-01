@@ -56,6 +56,7 @@ function finalizeCarDoc(carDocument, specifications, carSubItems, carAnsItems){
       }
       carDocument[group] = groupObject;
     }
+    carDocument["age"]="new" // this will help us know that we are dealing with a new item
     return carDocument;
 
 }
