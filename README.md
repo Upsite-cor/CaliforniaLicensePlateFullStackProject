@@ -32,4 +32,5 @@ Happy coding! 🚗🔍👨‍💻
 
 
 <h2>[NOTE: Still Under Development]</h2>
-<h2>[Backend is fully functional, Front-end fully functional] I am in the process of making it pretty<</h2>
+<h2>[Backend is fully functional, Front-end fully functional]</h2>
+<h2> I am in the process of making it pretty</h2>
