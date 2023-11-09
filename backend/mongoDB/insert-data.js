@@ -39,6 +39,8 @@ function createSpecificationObject (carDocument, specifications){
    for(var i = 0; i < specifications.length; i++){
       carDocument[specifications[i]] = {};
    }
+   
+
    return carDocument;
    
 }

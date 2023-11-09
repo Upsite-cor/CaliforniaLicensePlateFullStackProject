@@ -12,7 +12,7 @@ var fs = require('fs');
 var LPnumber;
 
 
-//main('9DXP329');
+//main('7XUZ739');
 
 function main(num){
     LPnumber = num;
