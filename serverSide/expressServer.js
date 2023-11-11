@@ -64,9 +64,10 @@ app.post('/upload', async (req,res)=>{
     //if it is a false then the vehicles is no where to be found
 })
 
+
 async function findCar(licenseNumber){
     var data;
-    data = await findData(licenseNumber);
+    data = await findData(licenseNumber); //goes to the function called main in main.js just the alias is findData
         //console.log(data);
         if(data == false){
             return 'data not found';

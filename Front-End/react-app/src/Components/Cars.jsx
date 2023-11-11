@@ -25,8 +25,11 @@ async function FetchAPI(){
 */
 
 //it does work just fetch is an async code so, you'll see carInfo be undefined because the rest of the code is runnning.
-function FetchAPI(){
-    fetch('http://192.168.0.31:3000/api/cars')
+
+
+/*
+async function FetchAPI(){
+    await fetch('http://192.168.0.31:3000/api/cars')
     .then(response => response.json())
     .then(car =>{
         //car is intialiting a string
@@ -38,11 +41,24 @@ function FetchAPI(){
         return carInfo;
     })
     .catch(error => {console.log(error); return null})
-
-
-
-
 }
+*/
+
+
+async function FetchAPI() {
+    try {
+      const response = await fetch('http://localhost:3000/api/cars');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const car = await response.json();
+      return JSON.parse(car);
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }
+  
 
 
 
@@ -74,8 +90,9 @@ function EntityTitle({children, onSelect}){
     
     
     return(
+        //className allows us to name our html class.
         <>
-        <button onClick = {onSelect}><h3>{children}</h3></button>
+        <button className = "entityButton" onClick = {onSelect}><h3>{children}</h3></button>
         </>
 
 
@@ -88,6 +105,12 @@ function EntityTitle({children, onSelect}){
 
 //never use try catch or async and await in react
 
+
+async function catchInfo(){
+    carInfo = await FetchAPI();
+    //console.log(carInfo);
+}
+
 export default function Cars(){
     
     //useStates are considered hooks alr so to set your variable you use setSelectedTopic to help with this
@@ -97,15 +120,22 @@ export default function Cars(){
         // selectedbutton can be one of those
         setSelectedTopic(selectedButton);
         console.log(selectedTopic)
+        for(var key in carInfo){
+            console.log(key);
+            var obj
+        }
     } 
     
+    catchInfo();
+
+
     //when calling handClick on onClick dont show parameters like handleClick()
     //I would reccomened a try catch here so no error appears
     //Okay there is two options you can take
 
     //1. Do parallel programming to ensure fast speed
     //2. make sure all your data is in that single API however, this risk for data leak
-    carInfo = FetchAPI();
+   
     //entityTitle();
     //object = {carInfo} //carInfo is a json object 
 
@@ -144,6 +174,6 @@ export default function Cars(){
 
 //TODO:
 /*
-    Finish watching the udemy to come up with ideas
-    then figure out axios and async/await to use in this program
+    1. Figure out how to take out keys from a json file in JS. We are going to use those keys to display data into our buttons 
+    2.console.log(carInfo.general[Make]); does it work like this?
 */
