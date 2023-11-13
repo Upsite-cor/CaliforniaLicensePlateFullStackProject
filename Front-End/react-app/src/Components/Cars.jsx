@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 var carInfo;
@@ -45,6 +45,7 @@ async function FetchAPI(){
 */
 
 
+/*
 async function FetchAPI() {
     try {
       const response = await fetch('http://localhost:3000/api/cars');
@@ -59,7 +60,7 @@ async function FetchAPI() {
     }
   }
   
-
+*/
 
 
 
@@ -105,11 +106,45 @@ function EntityTitle({children, onSelect}){
 
 //never use try catch or async and await in react
 
-
+/*
 async function catchInfo(){
     carInfo = await FetchAPI();
     //console.log(carInfo);
 }
+*/
+
+function GetCarInfo(){
+
+    const [info, setInfo] = useState([])
+    var arrTitle = [];
+    var obj;
+    useEffect(() => {
+        async function fetchInfo(){
+            const response = await  fetch('http://192.168.0.31:3000/api/cars');
+            var resData = await response.json();
+            obj = JSON.parse(resData);
+            for(var key in obj){
+                arrTitle.push(key);     //ERROR: try stringfying the key before inserting it    
+            }
+            setInfo(arrTitle);
+           // console.log("This is resData", info);
+        }
+        fetchInfo();
+    }, [])
+
+    console.log(info);
+    return (
+        <>
+            <ul>
+                {info.map((title) => (
+                    <li key={title}>{title}</li>
+                ))}
+            </ul>
+        </>
+    )
+}
+
+
 
 export default function Cars(){
     
@@ -122,13 +157,11 @@ export default function Cars(){
         console.log(selectedTopic)
         for(var key in carInfo){
             console.log(key);
-            var obj
         }
     } 
     
-    catchInfo();
-
-
+    //catchInfo();
+    //GetCarInfo();
     //when calling handClick on onClick dont show parameters like handleClick()
     //I would reccomened a try catch here so no error appears
     //Okay there is two options you can take
@@ -153,6 +186,7 @@ export default function Cars(){
                 Battery    
             </EntityTitle>
             </ul>
+            <GetCarInfo/>
             <p>{selectedTopic}</p>
             <div id="car-content">
                 <h3></h3>
