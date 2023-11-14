@@ -120,7 +120,7 @@ function GetCarInfo(){
     var obj;
     useEffect(() => {
         async function fetchInfo(){
-            const response = await  fetch('http://192.168.0.31:3000/api/cars');
+            const response = await  fetch('http://localhost:3000/api/cars');
             var resData = await response.json();
             obj = JSON.parse(resData);
             for(var key in obj){
