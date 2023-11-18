@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 
 
 var carInfo;
@@ -65,19 +65,19 @@ async function FetchAPI() {
 
 
 
-function MainTitle(props){
+function MainTitle(props) {
 
 
-    return(
+    return (
 
-    
+
         <h1>{props.children}</h1>
-        
+
 
     )
 }
 
-function EntityTitle({children, onSelect}){
+function EntityTitle({ children, onSelect }) {
     //when returning a component make sure you are only returning a single
     // parent element so like a div a section or a fragment
     // <></> == fragement <div></div> == div and so on the example below
@@ -87,13 +87,13 @@ function EntityTitle({children, onSelect}){
 
 
     //console.log("You are in Entity Title", props.carInfo);
-    
-    
-    
-    return(
+
+
+
+    return (
         //className allows us to name our html class.
         <>
-        <button className = "entityButton" onClick = {onSelect}><h3>{children}</h3></button>
+            <button className="entityButton" onClick={onSelect}><h3>{children}</h3></button>
         </>
 
 
@@ -113,97 +113,84 @@ async function catchInfo(){
 }
 */
 
-function GetCarInfo(){
-
+function GetCarInfo() {
+    const [selectedTopic, setSelectedTopic] = useState('Please click a button');
     const [info, setInfo] = useState([])
     var arrTitle = [];
     var obj;
-    useEffect(() => {
-        async function fetchInfo(){
-            const response = await  fetch('http://localhost:3000/api/cars');
-            var resData = await response.json();
-            obj = JSON.parse(resData);
-            for(var key in obj){
-                arrTitle.push(key);     //ERROR: try stringfying the key before inserting it    
-            }
-            setInfo(arrTitle);
-           // console.log("This is resData", info);
+
+
+    async function fetchInfo() {
+        const response = await fetch('http://192.168.0.31:3000/api/cars');
+        var resData = await response.json();
+        obj = JSON.parse(resData);
+        for (var key in obj) {
+            arrTitle.push(key);
         }
-        fetchInfo();
-    }, [])
+        setInfo(arrTitle);
+    }
+
+    //can I setinfo(arrTitle) here the reason is because i'm assuming im fetching over and over too many time
+    // so its making my stuff rerender too many times as my setSelectedTopic updates
+
+
+
+    function handleClick(selectedButton) {
+        setSelectedTopic(selectedButton);
+        console.log(selectedTopic)
+        for (var key in carInfo) {
+            console.log(key);
+        }
+    }
+
+
+    fetchInfo();
 
     console.log(info);
     return (
-        <>
-            <ul>
-                {info.map((title) => (
-                    <li key={title}>{title}</li>
-                ))}
-            </ul>
-        </>
+        <div>
+            {info.map((title) => {
+                return <div key={title}><EntityTitle onSelect={() => handleClick("you've pressed" + {title})}>{title}</EntityTitle></div>
+            })}
+            <p>{selectedTopic}</p>
+        </div>
     )
 }
 
 
 
-export default function Cars(){
-    
-    //useStates are considered hooks alr so to set your variable you use setSelectedTopic to help with this
-    const [selectedTopic, setSelectedTopic] = useState('Please click a button'); //this must be called on the top of the function never nested 
-    function handleClick(selectedButton){
-        //selectedButton = "general", "Battery"
-        // selectedbutton can be one of those
+export default function Cars() {
+
+
+    //const [selectedTopic, setSelectedTopic] = useState('Please click a button');
+
+    /*
+    function handleClick(selectedButton) {
         setSelectedTopic(selectedButton);
         console.log(selectedTopic)
-        for(var key in carInfo){
+        for (var key in carInfo) {
             console.log(key);
         }
-    } 
-    
-    //catchInfo();
-    //GetCarInfo();
-    //when calling handClick on onClick dont show parameters like handleClick()
-    //I would reccomened a try catch here so no error appears
-    //Okay there is two options you can take
+    }
+    */
 
-    //1. Do parallel programming to ensure fast speed
-    //2. make sure all your data is in that single API however, this risk for data leak
-   
-    //entityTitle();
-    //object = {carInfo} //carInfo is a json object 
+
+
+
+
 
     return (
         <div>
             <main>
-            <MainTitle>data</MainTitle>
-            
-            <ul>
-            <EntityTitle /*onSelect will also be passed into EntityTitle*/onSelect={() => handleClick('General Stuff')}/* This allows us to pass data into the parameters */>
-                General    
-            </EntityTitle>
-
-            <EntityTitle /*onSelect will also be passed into EntityTitle*/onSelect={() => handleClick('Battery')}/* This allows us to pass data into the parameters */>
-                Battery    
-            </EntityTitle>
-            </ul>
-            <GetCarInfo/>
-            <p>{selectedTopic}</p>
-            <div id="car-content">
-                <h3></h3>
-                <p></p>
-                <pre>
-                    <code>
-
-                    </code>
-                </pre>
-            </div>
+                <MainTitle>data</MainTitle>
+                <GetCarInfo />
             </main>
         </div>
 
 
     )
 
- 
+
 }
 
 //TODO:
