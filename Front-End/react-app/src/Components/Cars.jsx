@@ -1,4 +1,4 @@
-import { useState} from 'react';
+import { useState, useEffect} from 'react';
 
 
 var carInfo;
@@ -118,21 +118,7 @@ function GetCarInfo() {
     const [info, setInfo] = useState([])
     var arrTitle = [];
     var obj;
-
-
-    async function fetchInfo() {
-        const response = await fetch('http://192.168.0.31:3000/api/cars');
-        var resData = await response.json();
-        obj = JSON.parse(resData);
-        for (var key in obj) {
-            arrTitle.push(key);
-        }
-        setInfo(arrTitle);
-    }
-
-    //can I setinfo(arrTitle) here the reason is because i'm assuming im fetching over and over too many time
-    // so its making my stuff rerender too many times as my setSelectedTopic updates
-
+    
 
 
     function handleClick(selectedButton) {
@@ -143,8 +129,26 @@ function GetCarInfo() {
         }
     }
 
+    async function fetchInfo() {
+            const response = await fetch('http://localhost:3000/api/cars');
+            var resData = await response.json();
+            obj = JSON.parse(resData);
+            for (var key in obj) {
+                arrTitle.push(key);
+            }
+            setInfo(arrTitle);
+    }
+    
 
-    fetchInfo();
+    useEffect(() => {
+     fetchInfo();
+        
+    }, [])
+
+
+    //can I setinfo(arrTitle) here the reason is because i'm assuming im fetching over and over too many time
+    // so its making my stuff rerender too many times as my setSelectedTopic updates
+
 
     console.log(info);
     return (
