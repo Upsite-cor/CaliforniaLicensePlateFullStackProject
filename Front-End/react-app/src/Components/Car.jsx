@@ -100,27 +100,60 @@ const getNestedKeyValues = (carObj) => {
 
 }
 
-
-const printObj = (Obj) => {
-  console.log(Obj);
+// eslint-disable-next-line
+const printObj = (objVarName, obj) => {
+  console.log(objVarName + ": ");
+  console.log(obj);
 }
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
 ////////Components are below and above are functions in javascript///////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-const EntityTitle = ({entitys, carLicense, carLicenseValue, nestedCarKey, nestedCarKeyValues}) => {
+
+
+function checkIfArrayEmpty(entitys){
   if (!Array.isArray(entitys) || entitys.length === 0) {
     // Render a loading state or a message indicating data is loading
-    return <div>Loading...</div>;
+    return true;
   }
+}
+
+
+const EntityTitle = ({entitys, carLicense, carLicenseValue, nestedCarKey, nestedCarKeyValues}) => {
+  const [nestCarKeyTitle, setNestCarKeyTitle] = useState([]); // This is the carKey title (make, mode, etc..)
+  const [nestCarKeyValue, setNestCarKeyValue] = useState([]); // This is the carKey Value (what type of make, mode, and etc...)
+  
+  function clickHandler({enTitle: selectedEnTitle}){
+    let index = entitys.indexOf(selectedEnTitle);
+    setNestCarKeyTitle(nestedCarKey[index]);
+    setNestCarKeyValue(nestedCarKeyValues[index]);
+    console.log("title: ", selectedEnTitle, "Index: ", index, "info of index: ", nestCarKeyTitle);
+  }
+
+  if (checkIfArrayEmpty(entitys) === true){
+    return <div>Loading...</div>
+  }
+  
+  // if (!Array.isArray(entitys) || entitys.length === 0) {
+  //   // Render a loading state or a message indicating data is loading
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <>
+    <h1>{carLicenseValue}</h1>
       {entitys.map(enTitle => (
-        <button key={enTitle}>{enTitle}</button>
+        <li><button key={enTitle} onClick={() => clickHandler({enTitle})}>{enTitle}</button></li>
+      ))}
+      {/* add another map that prints the nested car key in a downward list */}
+      {nestCarKeyTitle.map(nestCarKeyTitle => (
+        <li className = "nestedCarKeyTitle"key={nestCarKeyTitle}>{nestCarKeyTitle}</li>
+      ))}
+      {nestCarKeyValue.map(nestCarKeyValue => (
+        <li className="nestCarKeyValue" key={nestCarKeyValue}>{nestCarKeyValue}</li>
+
       ))}
     </>
   );
@@ -242,13 +275,13 @@ export default function Car() {
         setCarLicenseState(carLicense||'');
         setCarLicenseValueState(carLicenseValue || '');
 
-        // Perform operations or set states as needed
-        // printObj(carEntityTitle);
-        // printObj(carLicense);
-        // printObj(carKey);
-        // printObj(carLicenseValue);
-        // printObj(nestedCarKey);
-        // printObj(nestedCarKeyValues);
+        //Perform operations or set states as needed
+        printObj("carEntityTitle ", carEntityTitle);
+        printObj("carLicense ", carLicense);
+        printObj("carKey ", carKey);
+        printObj("carLicenseValue ",carLicenseValue);
+        printObj("nestedCarKey ", nestedCarKey);
+        printObj("nestedCarKeyValues ", nestedCarKeyValues);
 
       } catch (err) {
         console.log(err);
