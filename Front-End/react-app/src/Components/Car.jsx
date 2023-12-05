@@ -6,8 +6,7 @@ import { useEffect, useState } from "react";
     
 
     CONTINUTE:
-    1. Add click events into the buttons. Once a user clicks an event data should appear.
-    2. watch this video for this: https://www.udemy.com/course/react-the-complete-guide-incl-redux/learn/lecture/39649204#overview
+    1. Make it look pretty with css
  * 
  */
 
@@ -136,25 +135,50 @@ const EntityTitle = ({entitys, carLicense, carLicenseValue, nestedCarKey, nested
     return <div>Loading...</div>
   }
   
-  // if (!Array.isArray(entitys) || entitys.length === 0) {
-  //   // Render a loading state or a message indicating data is loading
-  //   return <div>Loading...</div>;
-  // }
+  /**
+   * Styles
+   */
+
+  var nestCarKeyValueStyle = {
+    position:"relative",
+    left:"600px",
+    backgroundColor:"#ffc107",
+    "z-index":"3"
+  }
+
+  //I want this to be behind nestCarKeyValueStyle
+  var nestCarKeyTitleStyle={
+    backgroundColor:"#dc3545",
+    position:"absolute",
+    top:"95px",
+    left:"300px",
+    width:"300px"
+  }
 
   return (
     <>
     <h1>{carLicenseValue}</h1>
+    <div className="Button">
       {entitys.map(enTitle => (
-        <li><button key={enTitle} onClick={() => clickHandler({enTitle})}>{enTitle}</button></li>
+        <button key={enTitle} onClick={() => clickHandler({enTitle})}>{enTitle}</button>
       ))}
+    </div>
+    
       {/* add another map that prints the nested car key in a downward list */}
-      {nestCarKeyTitle.map(nestCarKeyTitle => (
-        <li className = "nestedCarKeyTitle"key={nestCarKeyTitle}>{nestCarKeyTitle}</li>
-      ))}
+      <div clasName="nestedCarKeyTitle" style= {nestCarKeyTitleStyle}> 
+      {nestCarKeyTitle.map((nestCarKeyTitle, index) => (
+  <li style={{ listStyleType: "none" }} key={index}>
+    {nestCarKeyTitle}
+  </li>
+))}
+
+      </div>
+      <div className="nestCarKeyValue" style={nestCarKeyValueStyle}>
       {nestCarKeyValue.map(nestCarKeyValue => (
-        <li className="nestCarKeyValue" key={nestCarKeyValue}>{nestCarKeyValue}</li>
+        <li key={nestCarKeyValue} style={{"list-style-type":"none"}}>{nestCarKeyValue}</li>
 
       ))}
+      </div>
     </>
   );
 };
