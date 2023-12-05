@@ -10,187 +10,217 @@ import { useEffect, useState } from "react";
  * 
  */
 
-
 //extracted this from my component because
 //this method will be created once.
 const getCars = async () => {
-    const response = await fetch("http://localhost:3000/api/cars");
-    var resData = await response.json();
-    return JSON.parse(resData);
-  };
-
+  const response = await fetch("http://localhost:3000/api/cars");
+  var resData = await response.json();
+  return JSON.parse(resData);
+};
 
 //checks if an array is empty.
 const isEmpty = (obj) => {
-
-  if(obj === undefined){
+  if (obj === undefined) {
     return true;
   }
 
-  if(obj.length === 0){
+  if (obj.length === 0) {
     return true;
-  }
-  else{
+  } else {
     return false;
   }
-}
+};
 
-
-const  getEntity= (carObj) => {
+const getEntity = (carObj) => {
   var carEntityTitle = [];
-  if(isEmpty(carObj)){
+  if (isEmpty(carObj)) {
     return;
-  }else{
-        //gets the keys from the entities
-        for(var key in carObj){
-          carEntityTitle.push(key);
-      }
-      //console.log("CarEntityTitle: ", carEntityTitle);
-      return carEntityTitle;
+  } else {
+    //gets the keys from the entities
+    for (var key in carObj) {
+      carEntityTitle.push(key);
+    }
+    //console.log("CarEntityTitle: ", carEntityTitle);
+    return carEntityTitle;
   }
-}
-
+};
 
 const getKeys = (carObj) => {
   var keys = [];
   //console.log("this is the getKeys function: ", keyObj);
-  if(isEmpty(carObj)){
+  if (isEmpty(carObj)) {
     return;
-  }
-  else{
-    for(var key in carObj){
+  } else {
+    for (var key in carObj) {
       keys.push(carObj[key]);
     }
     //console.log("carKeys: ", keys);
     return keys;
   }
-
-}
+};
 
 //Get the nested key names;
 const getNestedKeys = (carObj) => {
   var nestedKey = [];
-  if(isEmpty(carObj)){
+  if (isEmpty(carObj)) {
     return;
-  }else{
-    for(var i = 0; i < carObj.length; i++){
-      nestedKey.push(getEntity(carObj[i]))
+  } else {
+    for (var i = 0; i < carObj.length; i++) {
+      nestedKey.push(getEntity(carObj[i]));
     }
     //keyValue.shift();
     //console.log("nested key values: ",  nestedKey);
     return nestedKey;
   }
-}
+};
 
 //get nested keyValues
 const getNestedKeyValues = (carObj) => {
   var nestedKeyValue = [];
-  if(isEmpty(carObj)){
+  if (isEmpty(carObj)) {
     return;
-  }else{
-
-    for(var i = 0; i < carObj.length; i++){
+  } else {
+    for (var i = 0; i < carObj.length; i++) {
       nestedKeyValue.push(getKeys(carObj[i]));
     }
     //nestedKeyValue.shift();
     //console.log("nestedKeyValue: ", nestedKeyValue);
     return nestedKeyValue;
   }
-
-}
+};
 
 // eslint-disable-next-line
 const printObj = (objVarName, obj) => {
   console.log(objVarName + ": ");
   console.log(obj);
-}
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
 ////////Components are below and above are functions in javascript///////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-function checkIfArrayEmpty(entitys){
+function checkIfArrayEmpty(entitys) {
   if (!Array.isArray(entitys) || entitys.length === 0) {
     // Render a loading state or a message indicating data is loading
     return true;
   }
 }
 
-
-const EntityTitle = ({entitys, carLicense, carLicenseValue, nestedCarKey, nestedCarKeyValues}) => {
+const EntityTitle = ({
+  entitys,
+  carLicense,
+  carLicenseValue,
+  nestedCarKey,
+  nestedCarKeyValues,
+}) => {
   const [nestCarKeyTitle, setNestCarKeyTitle] = useState([]); // This is the carKey title (make, mode, etc..)
   const [nestCarKeyValue, setNestCarKeyValue] = useState([]); // This is the carKey Value (what type of make, mode, and etc...)
-  
-  function clickHandler({enTitle: selectedEnTitle}){
+
+  function clickHandler({ enTitle: selectedEnTitle }) {
     let index = entitys.indexOf(selectedEnTitle);
     setNestCarKeyTitle(nestedCarKey[index]);
     setNestCarKeyValue(nestedCarKeyValues[index]);
-    console.log("title: ", selectedEnTitle, "Index: ", index, "info of index: ", nestCarKeyTitle);
+    console.log(
+      "title: ",
+      selectedEnTitle,
+      "Index: ",
+      index,
+      "info of index: ",
+      nestCarKeyTitle
+    );
   }
 
-  if (checkIfArrayEmpty(entitys) === true){
-    return <div>Loading...</div>
+  if (checkIfArrayEmpty(entitys) === true) {
+    return <div>Loading...</div>;
   }
-  
+
   /**
    * Styles
    */
 
-  var nestCarKeyValueStyle = {
-    position:"relative",
-    left:"600px",
-    backgroundColor:"#ffc107",
-    "z-index":"3"
+  const bodyStyle = {
+    backgroundColor: "#000",
+    color: "#00ff00",
+    fontFamily: "'Courier New', monospace",
+  };
+  
+  const TableCellStyle = {
+    borderCollapse: "collapse",
+    width: "400px",
+    margin: "20px auto",
+    border: "1px solid #00ff00",
+  };
+  
+  const TableRows = {
+    backgroundColor: "#003300",
+    cellColor: "#00ff00"
   }
+  
+  const TableCellStyles = {
+    padding: "10px",
+    borderBottom: "2px solid #00ff00",
+    fontWeight: "bold",
+  };
 
-  //I want this to be behind nestCarKeyValueStyle
-  var nestCarKeyTitleStyle={
-    backgroundColor:"#dc3545",
-    position:"absolute",
-    top:"95px",
-    left:"300px",
-    width:"300px"
-  }
+  const plateStyle = {
+    position:"relative",
+    left:"840px",
+    bottom:"40px",
+    backgroundColor: '#000',
+    color: '#0f0',
+    padding: '8px 16px',
+    border: '2px solid #0f0',
+    fontFamily: 'Courier New, monospace',
+    textTransform: 'uppercase',
+    borderRadius: '5px',
+    display: 'inline-block',
+  };
+
 
   return (
     <>
-    <h1>{carLicenseValue}</h1>
-    <div className="Button">
-      {entitys.map(enTitle => (
-        <button key={enTitle} onClick={() => clickHandler({enTitle})}>{enTitle}</button>
-      ))}
-    </div>
-    
+    <body style={{bodyStyle}}>
+      <h1 style={plateStyle}>License Plate: {carLicenseValue}</h1>
+      <div className="Button">
+        {entitys.map((enTitle) => (
+          <button key={enTitle} onClick={() => clickHandler({ enTitle })}>
+            {enTitle}
+          </button>
+        ))}
+      </div>
+
       {/* add another map that prints the nested car key in a downward list */}
-      <div clasName="nestedCarKeyTitle" style= {nestCarKeyTitleStyle}> 
-      {nestCarKeyTitle.map((nestCarKeyTitle, index) => (
-  <li style={{ listStyleType: "none" }} key={index}>
-    {nestCarKeyTitle}
-  </li>
-))}
+      <body style={bodyStyle}>
+      <table className="nestedCarKeyTitle" style={TableCellStyle}>
+        <tbody>
+            {nestCarKeyTitle.map((nestCarKeyTitle, index) => (
+              <>
+                <tr style={TableRows}>
+                <td key={nestCarKeyTitle} style={TableCellStyles}>{nestCarKeyTitle}</td>
+                <td key={nestCarKeyValue[index]} style={TableCellStyles}>{nestCarKeyValue[index]}</td>
+                </tr>
+              </>
+            ))}
+        </tbody>
+      </table>
+      </body>
 
-      </div>
-      <div className="nestCarKeyValue" style={nestCarKeyValueStyle}>
-      {nestCarKeyValue.map(nestCarKeyValue => (
-        <li key={nestCarKeyValue} style={{"list-style-type":"none"}}>{nestCarKeyValue}</li>
-
-      ))}
-      </div>
+      {/* <div className="nestCarKeyValue" style={nestCarKeyValueStyle}>
+        {nestCarKeyValue.map((nestCarKeyValue) => (
+          <li key={nestCarKeyValue} style={{ "list-style-type": "none" }}>
+            {nestCarKeyValue}
+          </li>
+        ))}
+      </div> */}
+      </body>
     </>
   );
 };
 
-
-
-
-
-
 // export default function Car() {
 //   const [carObj, setCarObj] = useState([]);
-  
+
 //   /*
 //   const [carEntityTitleState, setCarEntityTitleState] = useState([]);
 //   const [carKeyState, setCarKeyState] = useState([]);
@@ -208,7 +238,7 @@ const EntityTitle = ({entitys, carLicense, carLicenseValue, nestedCarKey, nested
 //   var carLicense;
 //   var carLicenseValue;
 
-//   //Fetches api once 
+//   //Fetches api once
 //   useEffect(() => {
 //     getCars().then((setCarObj))
 //   }, [])
@@ -223,7 +253,7 @@ const EntityTitle = ({entitys, carLicense, carLicenseValue, nestedCarKey, nested
 //         nestedCarKey = getNestedKeys(carKey); //gets the nested entity
 //         nestedCarKeyValues = getNestedKeyValues(carKey);
 //         //setCarEntityTitleState(carEntityTitle);
-        
+
 //         /*
 //         setCarKeyState(carKey);
 //         setNestedCarKeyState(nestedCarKey);
@@ -231,37 +261,30 @@ const EntityTitle = ({entitys, carLicense, carLicenseValue, nestedCarKey, nested
 //         setCarLicenseState(carLicense);
 //         setCarLicenseValueState(carLicenseValue);
 //         */
-    
+
 //         printObj(carEntityTitle);
 //         printObj(carKey);
 //         printObj(nestedCarKey);
 //         printObj(nestedCarKeyValues);
 //         printObj(carLicense);
 //         printObj(carLicenseValue);
-   
-  
- 
+
 //   }
 //   catch(err){
 //     console.log(err);
 //   }
- 
 
 //   return (
-  
-//   <div>  
+
+//   <div>
 //   <h1>Data</h1>
 //   {/*carEntityTitleState.length === 0 ? <p></p> : <EntityTitle entitys={carEntityTitleState}/>*/}
 //   </div>
 
-  
 //   );
 // }
 
-
-
-// 
-
+//
 
 export default function Car() {
   const [carEntityTitleState, setCarEntityTitleState] = useState([]);
@@ -273,13 +296,11 @@ export default function Car() {
 
   // ... other state variables
 
-  
-  
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getCars(); // Fetch the car data
-        
+
         // Data manipulation
         const carEntityTitle = getEntity(data);
         const carLicense = carEntityTitle?.shift();
@@ -290,23 +311,21 @@ export default function Car() {
         const nestedCarKey = getNestedKeys(carKey);
         const nestedCarKeyValues = getNestedKeyValues(carKey);
 
-
         // Update state variables
         setCarEntityTitleState(carEntityTitle || []);
         //setCarKeyState(carKey || []);
         setNestedCarKeyState(nestedCarKey || []);
         setNestedCarKeyValuesState(nestedCarKeyValues || []);
-        setCarLicenseState(carLicense||'');
-        setCarLicenseValueState(carLicenseValue || '');
+        setCarLicenseState(carLicense || "");
+        setCarLicenseValueState(carLicenseValue || "");
 
         //Perform operations or set states as needed
         printObj("carEntityTitle ", carEntityTitle);
         printObj("carLicense ", carLicense);
         printObj("carKey ", carKey);
-        printObj("carLicenseValue ",carLicenseValue);
+        printObj("carLicenseValue ", carLicenseValue);
         printObj("nestedCarKey ", nestedCarKey);
         printObj("nestedCarKeyValues ", nestedCarKeyValues);
-
       } catch (err) {
         console.log(err);
       }
@@ -315,22 +334,16 @@ export default function Car() {
     fetchData(); // Invoke the function to fetch and process data
   }, []);
 
-
-
   return (
-    
-      <div>
-        <h1>Data</h1>
-        <EntityTitle 
+    <div>
+      <h1>Vehicle Information</h1>
+      <EntityTitle
         entitys={carEntityTitleState}
         carLicense={carLicenseState}
         carLicenseValue={carLicenseValueState}
         nestedCarKey={nestedCarKeyState}
         nestedCarKeyValues={nestedCarKeyValuesState}
-        />
-      </div>
-  
+      />
+    </div>
   );
 }
-
-
