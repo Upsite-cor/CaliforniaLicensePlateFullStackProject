@@ -107,7 +107,7 @@ function checkIfArrayEmpty(entitys) {
   }
 }
 
-const EntityTitle = ({
+const EntityInfo = ({
   entitys,
   carLicense,
   carLicenseValue,
@@ -177,6 +177,21 @@ const EntityTitle = ({
     display: 'inline-block',
   };
 
+  const buttonStyle = {
+    background: 'linear-gradient(to right, #00b300, #004d00)',
+    color: '#fff',
+    padding: '16px 32px',
+    border: '2px solid #00ff00',
+    borderRadius: '10px',
+    margin: '10px',
+    cursor: 'pointer',
+    fontFamily: "'Courier New', monospace",
+    fontSize: '18px',
+    textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+    boxShadow: '3px 3px 8px rgba(0, 255, 0, 0.5)',
+  };
+
+  
 
   return (
     <>
@@ -184,7 +199,7 @@ const EntityTitle = ({
       <h1 style={plateStyle}>License Plate: {carLicenseValue}</h1>
       <div className="Button">
         {entitys.map((enTitle) => (
-          <button key={enTitle} onClick={() => clickHandler({ enTitle })}>
+          <button style = {buttonStyle} key={enTitle} onClick={() => clickHandler({ enTitle })}>
             {enTitle}
           </button>
         ))}
@@ -337,7 +352,7 @@ export default function Car() {
   return (
     <div>
       <h1>Vehicle Information</h1>
-      <EntityTitle
+      <EntityInfo
         entitys={carEntityTitleState}
         carLicense={carLicenseState}
         carLicenseValue={carLicenseValueState}
