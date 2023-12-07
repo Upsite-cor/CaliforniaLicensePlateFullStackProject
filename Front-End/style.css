@@ -1,42 +1,85 @@
-h1.LPFh1{
-    text-align: center;
-   position:relative;
-    bottom:100px;
-    right:230px;
-    font-size:40px;
+body {
+    background-color: #000;
+    color: #0f0;
+    font-family: 'Courier New', monospace;
 }
 
-header{
-    background-color:red;
+h1.LPFh1 {
+    text-align: center;
+    position: relative;
+    bottom: 100px;
+    right: 230px;
+    font-size: 40px;
+}
+
+#message{
+    position: relative;
+    left: 26%;
+    z-index: 3;
+    top: 350px;
+    font-size: 30px;
+}
+
+
+header {
+    background-color: #000;
     padding-bottom: 50px;
     padding-top: 50px;
     position: relative;
-    bottom:8px;
+    bottom: 8px;
     margin: 0%;
-    right:8px;
-    width:102%
+    right: 8px;
+    width: 102%;
+    box-shadow: 0px 10px 10px rgba(0, 255, 0, 0.5); /* Adding a shadow effect */
 }
 
-#Lnumber{
-    height:50px;
+
+
+img{
+    width: 90px;
+    height: auto;
+}
+
+#Lnumber {
+    height: 50px;
     width: 700px;
-    position:relative;
-    top:170px
+    position: relative;
+    top: 170px;
+    right:120px;
+    background-color: #000;
+    color: #0f0;
+    border: 2px solid #0f0;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 8px;
 }
 
-label.LPN{
- position:relative;
- top:100px;
- left:100px;
- font-size:30px;
+label.LPN {
+    position: relative;
+    top: 100px;
+    left: 100px;
+    font-size: 30px;
+    color: #0f0;
 }
 
 
-#search{
-    position:relative;
-    left:1027px;
-    top: 128px;
-    height: 43px;
+
+
+#search {
+    position: relative;
+    left: 1027px;
+    top: 111px;
+    height: 55px;
     width: 222px;
     font-size: 20px;
+    background-color: #007f00;
+    border: 2px solid #0f0;
+    border-radius: 5px;
+    color: #000;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Adding transition effect */
+}
+
+#search:hover {
+    background-color: #00ff00; /* Change color on hover */
 }

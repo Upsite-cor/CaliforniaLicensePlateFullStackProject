@@ -17,6 +17,8 @@ async function run(LPnum) {
           };
          // Find and return the document
          const filter = { "licensePlate": `${LPnum}` };
+         const updateAge = {$set: {"age":"old"}};
+         const result = await col.updateOne(filter, updateAge); //will help the system know that we are dealing with an already exisiting item
          const document = await col.findOne(filter, options);
          var doc = JSON.stringify(document);
          //console.log("Document found:\n" + doc);

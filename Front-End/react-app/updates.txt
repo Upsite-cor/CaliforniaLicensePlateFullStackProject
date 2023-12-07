@@ -1,0 +1,5 @@
+1. I updated the index.html file so we could have ahacker look.
+    a. steps to get into index.html react-app > public -> index.html
+
+2. I updated the car component to add cool hacker effects for the website
+    a. steps to reproduce go into src > components > car compoenent

@@ -39,6 +39,8 @@ function createSpecificationObject (carDocument, specifications){
    for(var i = 0; i < specifications.length; i++){
       carDocument[specifications[i]] = {};
    }
+   
+
    return carDocument;
    
 }
@@ -56,6 +58,7 @@ function finalizeCarDoc(carDocument, specifications, carSubItems, carAnsItems){
       }
       carDocument[group] = groupObject;
     }
+    carDocument["age"]="new" // this will help us know that we are dealing with a new item
     return carDocument;
 
 }
