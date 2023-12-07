@@ -143,6 +143,7 @@ const getLicenseNumber = async () => {
       console.log(data.found)
       var carObj = data.carDescription
       console.log("carObj: ", carObj)
+      
       if (data.found) {
         //console.log(carObj);
 

@@ -2,7 +2,7 @@
 const path = require('path');
 const cors = require('cors');
 const express = require('express');
-const {main:findData} = require('../backend/js/main')
+const {main:findData} = require('../js/main')
 const punycode = ('puncycode/');
 const app = express(); //creates applicaiton
 var carDescription;
