@@ -53,13 +53,35 @@ app.get('/api/cars',(req,res)=>{
 })
 
 
+app.get('/errorImage', (req, res) => {
+    const imagePath = '/Users/bryan/Documents/seniorProj/webDraft5/LicensePlateLookup/Front-End/crying emoji.png'; // Replace with the actual path to your image
+    res.sendFile(imagePath);
+  });
+  
+  app.get('/searchingImage', (req, res) => {
+    const imagePath = '/Users/bryan/Documents/seniorProj/webDraft5/LicensePlateLookup/Front-End/searching_emoji.png'; // Replace with the actual path to your image
+    res.sendFile(imagePath);
+  });
+
+  app.get('/happyImage', (req, res) => {
+    const imagePath = '/Users/bryan/Documents/seniorProj/webDraft5/LicensePlateLookup/Front-End/Happy_emoji.png'; // Replace with the actual path to your image
+    res.sendFile(imagePath);
+  });
+
 app.post('/upload', async (req,res)=>{
     console.log(req.body.Lnumber);
     var licenseNumber = req.body.Lnumber;
     carDescription =  await findCar(licenseNumber);
     console.log('app.post starting to look for carDescription: ', carDescription)
-   
 
+    if(carDescription != 'data not found'){
+        console.log("status 200")
+        res.status(200).send({found:true, carDescription});
+    }
+    else{
+        console.log("status 400")
+        res.status(400).send({found:false});
+    }
     //this returns a true of false statement
     //If there is a value that is true then the vehicle is found
     //if it is a false then the vehicles is no where to be found

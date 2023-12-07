@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,29 +10,33 @@
 
     <title>License Plate Finder</title>
 </head>
+
 <body>
-    <header class = "BackgroundHeader">
+    <header class="BackgroundHeader">
     </header>
-    <h1 class ="LPFh1">
+    <h1 class="LPFh1">
         License Plate Finder
     </h1>
-        <form class = "form">
-            <div>
-                <label for="LPN" class="LPN">License Plate Number:</label>
-                <input type="text" id="Lnumber" name="Lnumber" placeholder="">
-            </div>
+    <form class="form">
+        <div>
+            <div class="LPN" id="message"></div>
+            <label for="LPN" class="LPN">License Plate Number:</label>
+            <input type="text" id="Lnumber" name="Lnumber" placeholder="">
+        </div>
 
-            <div id = "subButton">
-                <input type="submit" id="search" value="search">
-              </div>
-        </form>
- 
+        <div id="subButton">
+            <input type="submit" id="search" value="search">
+        </div>
+    </form>
 
 
-        <!-- We need type = module in order to use exports and imports-->
-        <script type="module" src="./RetrieveData.js"> </script>
-       <!----<script type="module" src="../backend/js/main.js"> </script> -->
+    <div></div>
+
+
+
+    <!-- We need type = module in order to use exports and imports-->
+    <script type="module" src="./RetrieveData.js"> </script>
+    <!----<script type="module" src="../backend/js/main.js"> </script> -->
 
 </body>
 </html>
-

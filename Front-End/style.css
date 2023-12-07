@@ -12,6 +12,15 @@ h1.LPFh1 {
     font-size: 40px;
 }
 
+#message{
+    position: relative;
+    left: 26%;
+    z-index: 3;
+    top: 350px;
+    font-size: 30px;
+}
+
+
 header {
     background-color: #000;
     padding-bottom: 50px;
@@ -26,7 +35,10 @@ header {
 
 
 
-
+img{
+    width: 90px;
+    height: auto;
+}
 
 #Lnumber {
     height: 50px;
