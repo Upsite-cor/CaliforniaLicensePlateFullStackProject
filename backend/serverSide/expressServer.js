@@ -18,11 +18,11 @@ app.use(express.urlencoded({extended:false}));
 
 //This accepts all http request on any route hence the *
 
-app.use(express.static('/Users/bryan/Documents/seniorProj/webDraft5/LicensePlateLookup/Front-End/HTML_CSS_JS'))
+app.use(express.static('/Users/bryan/Documents/seniorProj/webDraft5/LicensePlateLookup/frontend/home_page'))
 
 app.all('/', (req,res) =>{
     //express handles the headers the basic headers
-    var index_path = "/Users/bryan/Documents/seniorProj/webDraft5/LicensePlateLookup/Front-End/HTML_CSS_JS/index.html"
+    var index_path = "/Users/bryan/Documents/seniorProj/webDraft5/LicensePlateLookup/frontend/home_page/index.html"
     console.log(path.join(index_path))
     res.sendFile(path.join(index_path))
 })
