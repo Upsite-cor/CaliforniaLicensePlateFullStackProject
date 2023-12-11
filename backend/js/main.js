@@ -7,7 +7,6 @@ const {initateSearch} = require ('./lookupPlate.js');
 const {cmd: fetchHtml} = require ('./execMethod.js');
 const {processData} = require('../mongoDB/insert-data.js');
 const {checkForLicense}=require('../mongoDB/extractData.js');
-const punycode = require('punycode')
 var fs = require('fs');
 //9DXP329          
 var LPnumber;
