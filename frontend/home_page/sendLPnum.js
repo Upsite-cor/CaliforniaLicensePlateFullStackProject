@@ -7,7 +7,7 @@ const displaySearchingMessage = async() => {
   message.style.color = 'yellow';
 
   const img = document.createElement('img');
-  img.src = 'http://localhost:3000/searchingImage'; // URL where the searching image is served
+  img.src = 'http://localhost:3000/searchingImage'; 
   message.appendChild(img);
 }
 
@@ -16,7 +16,7 @@ const displayNotFoundMessage = () =>{
   message.innerText = 'Car not found';
   message.style.color = 'red';
   const img = document.createElement('img');
-  img.src = 'http://localhost:3000/errorImage'; // URL where the error image is served
+  img.src = 'http://localhost:3000/errorImage'; 
   message.appendChild(img);
 }
 
@@ -28,7 +28,7 @@ const checkIfCarExistOneMoreTime = async ()=>{
   message.innerText = 'Car found!'
   message.style.color = 'green'
   const img = document.createElement('img');
-  img.src = 'http://localhost:3000/happyImage'; // URL where the error image is served
+  img.src = 'http://localhost:3000/happyImage';
   message.appendChild(img);
 
   await delay(1000)
@@ -71,13 +71,12 @@ const getLicenseNumber = async () => {
       console.log("carObj: ", carObj)
       
       if (data.found) {
-        //console.log(carObj);
 
 
         message.innerText = 'Car found!'
         message.style.color = 'green'
         const img = document.createElement('img');
-        img.src = 'http://localhost:3000/happyImage'; // URL where the error image is served
+        img.src = 'http://localhost:3000/happyImage';
         message.appendChild(img);
         
 

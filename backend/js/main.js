@@ -1,5 +1,3 @@
-//I can say why using the wget is better than using puppeteers wget to get html files. 
-//Because wget comes with a more organized html file making it easier to search through.
 
 
 
@@ -8,11 +6,12 @@ const {cmd: fetchHtml} = require ('./execMethod.js');
 const {processData} = require('../mongoDB/insert-data.js');
 const {checkForLicense}=require('../mongoDB/extractData.js');
 var fs = require('fs');
-//9DXP329          
+
+
 var LPnumber;
 
 
-//main('RUFFO');
+
 
 function main(num){
     LPnumber = num;
@@ -21,7 +20,7 @@ function main(num){
 }
 
 
-//var license = check();
+
 
 async function check() {
     return new Promise(async (resolve, reject) => {
@@ -41,15 +40,10 @@ async function check() {
 
 }
 
-//todo: if there is no license plate in the database start the scraper search. If there is no license plate in the scraper search
-// ask the user to input deatils of the car or just notfiy em.
 
-
-
-//license.then(dataFoundinDB, dataNotFoundinDB);
 
 function dataFoundinDB(data){
-    console.log(data); // we found the data in mongoDB
+    console.log(data); 
     return data;
 }
 
@@ -60,15 +54,8 @@ async function dataNotFoundinDB(){
 
 }
 
-/*
-NOTES:
-//The error is around here
-//We want to process the data only if our output.txt contains html data.
-//If there is a 404 error it doesn't write.
-// one idea is that we should use a string to store in our html instead of scraping the txt
-// either or should anyways have fun!
 
-*/
+
 async function start(){
 
 
@@ -77,11 +64,11 @@ async function start(){
         console.log('headless browser done')
         console.log('finding htmltxt')
         
-        await createCommand(getHtml, LPnumber); // we need this to promise that after the command is done then we run process data.
+        await createCommand(getHtml, LPnumber); 
         console.log('htmlTxtFound')
         console.log('checking if car exist...')
         await new Promise(resolve => setTimeout(resolve, 8000));
-        carExist =  checkIfCarExist(); //using await function because i want the rest of my program to compile syncrousnusly.
+        carExist =  checkIfCarExist(); 
         console.log('car exist: ', carExist);
         if(!carExist){
             console.log('program finished')
@@ -92,19 +79,7 @@ async function start(){
             
         }
 
-        /*
-        setTimeout(() => {
-            carExist =  checkIfCarExist(); //using await function because i want the rest of my program to compile syncrousnusly.
-            console.log('car exist: ', carExist);
-            if(!carExist){
-                console.log('program finished')
-                return false;
-            }
-            else{
-                return  processData(LPnumber);
-                
-            }
-        }, 8000)*/
+
        
 
      

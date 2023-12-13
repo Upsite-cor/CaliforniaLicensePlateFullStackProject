@@ -15,13 +15,11 @@ async function run(LPnum) {
         const options = {
             projection: { _id: 0}
           };
-         // Find and return the document
          const filter = { "licensePlate": `${LPnum}` };
          const updateAge = {$set: {"age":"old"}};
-         const result = await col.updateOne(filter, updateAge); //will help the system know that we are dealing with an already exisiting item
+         const result = await col.updateOne(filter, updateAge);
          const document = await col.findOne(filter, options);
          var doc = JSON.stringify(document);
-         //console.log("Document found:\n" + doc);
         } catch (err) {
             console.log(err.stack);
             
@@ -34,7 +32,7 @@ async function run(LPnum) {
 }
 
 
-//async functions will always return a promise
+
 async function checkForLicense(LPnum){
     return await run(LPnum);
 }

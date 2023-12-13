@@ -1,4 +1,4 @@
-//inserts data into my mongoDB
+
 
 
 const { MongoClient } = require("mongodb");
@@ -6,7 +6,7 @@ const {getSpecificationLabels, populateCarLabel, giveCarItems, ifCarExist} = req
 var fs = require('fs');                                                                                                                               
 const url = "mongodb+srv://Upsite:211712347opol@cluster0.0ttaw6y.mongodb.net/?retryWrites=true&w=majority"
 const client = new MongoClient(url);
-const dbName = "LPnodes";  // Reference the database to use
+const dbName = "LPnodes";  
 var specifications;
 var carSubItems;
 var carAnsItems;
@@ -18,7 +18,7 @@ var carAnsItems;
          const col = db.collection("License");
          carDoc = _carDocument;
          //console.log(carDoc);
-        const p = await col.insertOne(carDoc); //inserts into database ;)
+        const p = await col.insertOne(carDoc); 
         } catch (err) {
          console.log(err.stack);
      }
@@ -46,7 +46,7 @@ function createSpecificationObject (carDocument, specifications){
 }
 
 function finalizeCarDoc(carDocument, specifications, carSubItems, carAnsItems){
-   var k = 0; //this will help us traverse the ansItemsArray
+   var k = 0;
    for (let i = 0; i < specifications.length; i++) {
       const group = specifications[i];
       const groupSpecifications = carSubItems[i];
@@ -54,11 +54,11 @@ function finalizeCarDoc(carDocument, specifications, carSubItems, carAnsItems){
 
       for (let j = 0; j < groupSpecifications.length; j++) {
         const specification = groupSpecifications[j];
-        groupObject[specification] = carAnsItems[k++]; // Set initial value to null
+        groupObject[specification] = carAnsItems[k++];
       }
       carDocument[group] = groupObject;
     }
-    carDocument["age"]="new" // this will help us know that we are dealing with a new item
+    carDocument["age"]="new"
     return carDocument;
 
 }
@@ -70,7 +70,6 @@ async function processData(licensePlate){
      if(error){
         console.log(error);
      }
-     //takes us to scrape HTML
      specifications = getSpecificationLabels(data); 
      carSubItems = populateCarLabel(data);
      carAnsItems = giveCarItems(data);
@@ -79,13 +78,12 @@ async function processData(licensePlate){
   await new Promise(resolve => setTimeout(resolve, 1000));
 
 
-  //setTimeout bc the function was running at the same time before the three vars above could get data                                                                                     
+                                                                                    
       let carDocument = {licensePlate};
       carDocument = createSpecificationObject (carDocument, specifications);
       carDocument = finalizeCarDoc(carDocument, specifications, carSubItems, carAnsItems);
-      //console.log(carDocument);
       run(carDocument).catch(console.dir);
-      return carDocument; // I added this is new 10/2/2023
+      return carDocument; 
 
  }
  

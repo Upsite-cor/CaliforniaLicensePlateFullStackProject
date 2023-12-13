@@ -6,7 +6,7 @@ const getCars = async () => {
   return JSON.parse(resData);
 };
 
-//checks if an array is empty.
+
 const isEmpty = (obj) => {
   if (obj === undefined) {
     return true;
@@ -24,30 +24,28 @@ const getEntity = (carObj) => {
   if (isEmpty(carObj)) {
     return;
   } else {
-    //gets the keys from the entities
+
     for (var key in carObj) {
       carEntityTitle.push(key);
     }
-    //console.log("CarEntityTitle: ", carEntityTitle);
+
     return carEntityTitle;
   }
 };
 
 const getKeys = (carObj) => {
   var keys = [];
-  //console.log("this is the getKeys function: ", keyObj);
   if (isEmpty(carObj)) {
     return;
   } else {
     for (var key in carObj) {
       keys.push(carObj[key]);
     }
-    //console.log("carKeys: ", keys);
     return keys;
   }
 };
 
-//Get the nested key names;
+
 const getNestedKeys = (carObj) => {
   var nestedKey = [];
   if (isEmpty(carObj)) {
@@ -56,13 +54,10 @@ const getNestedKeys = (carObj) => {
     for (var i = 0; i < carObj.length; i++) {
       nestedKey.push(getEntity(carObj[i]));
     }
-    //keyValue.shift();
-    //console.log("nested key values: ",  nestedKey);
     return nestedKey;
   }
 };
 
-//get nested keyValues
 const getNestedKeyValues = (carObj) => {
   var nestedKeyValue = [];
   if (isEmpty(carObj)) {
@@ -71,8 +66,6 @@ const getNestedKeyValues = (carObj) => {
     for (var i = 0; i < carObj.length; i++) {
       nestedKeyValue.push(getKeys(carObj[i]));
     }
-    //nestedKeyValue.shift();
-    //console.log("nestedKeyValue: ", nestedKeyValue);
     return nestedKeyValue;
   }
 };
@@ -83,14 +76,13 @@ const printObj = (objVarName, obj) => {
   console.log(obj);
 };
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
-////////Components are below and above are functions in javascript///////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+////////Components are below and above are functions in javascript///////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 function checkIfArrayEmpty(entitys) {
   if (!Array.isArray(entitys) || entitys.length === 0) {
-    // Render a loading state or a message indicating data is loading
     return true;
   }
 }
@@ -102,9 +94,8 @@ const EntityInfo = ({
   nestedCarKey,
   nestedCarKeyValues,
 }) => {
-  const [nestCarKeyTitle, setNestCarKeyTitle] = useState([]); // This is the carKey title (make, mode, etc..)
-  const [nestCarKeyValue, setNestCarKeyValue] = useState([]); // This is the carKey Value (what type of make, mode, and etc...)
-
+  const [nestCarKeyTitle, setNestCarKeyTitle] = useState([]); 
+  const [nestCarKeyValue, setNestCarKeyValue] = useState([]); 
   function clickHandler({ enTitle: selectedEnTitle }) {
     let index = entitys.indexOf(selectedEnTitle);
     setNestCarKeyTitle(nestedCarKey[index]);
@@ -123,9 +114,7 @@ const EntityInfo = ({
     return <div>Loading...</div>;
   }
 
-  /**
-   * Styles
-   */
+
 
   const bodyStyle = {
     backgroundColor: "#000",
@@ -221,9 +210,9 @@ export default function Car() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getCars(); // Fetch the car data
+        const data = await getCars(); 
 
-        // Data manipulation
+      
         const carEntityTitle = getEntity(data);
         const carLicense = carEntityTitle?.shift();
         carEntityTitle?.pop();
@@ -233,15 +222,14 @@ export default function Car() {
         const nestedCarKey = getNestedKeys(carKey);
         const nestedCarKeyValues = getNestedKeyValues(carKey);
 
-        // Update state variables
+
         setCarEntityTitleState(carEntityTitle || []);
-        //setCarKeyState(carKey || []);
         setNestedCarKeyState(nestedCarKey || []);
         setNestedCarKeyValuesState(nestedCarKeyValues || []);
         setCarLicenseState(carLicense || "");
         setCarLicenseValueState(carLicenseValue || "");
 
-        //Perform operations or set states as needed
+
         printObj("carEntityTitle ", carEntityTitle);
         printObj("carLicense ", carLicense);
         printObj("carKey ", carKey);
@@ -253,7 +241,7 @@ export default function Car() {
       }
     };
 
-    fetchData(); // Invoke the function to fetch and process data
+    fetchData(); 
   }, []);
 
   return (
