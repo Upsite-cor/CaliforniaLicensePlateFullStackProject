@@ -1,17 +1,5 @@
 import { useEffect, useState } from "react";
 
-/*
- *  ISSUES:
-    NONE
-    
-
-    CONTINUTE:
-    1. Make it look pretty with css
- * 
- */
-
-//extracted this from my component because
-//this method will be created once.
 const getCars = async () => {
   const response = await fetch("http://localhost:3000/api/cars");
   var resData = await response.json();
@@ -204,8 +192,6 @@ const EntityInfo = ({
           </button>
         ))}
       </div>
-
-      {/* add another map that prints the nested car key in a downward list */}
       <body style={bodyStyle}>
       <table className="nestedCarKeyTitle" style={TableCellStyle}>
         <tbody>
@@ -220,14 +206,6 @@ const EntityInfo = ({
         </tbody>
       </table>
       </body>
-
-      {/* <div className="nestCarKeyValue" style={nestCarKeyValueStyle}>
-        {nestCarKeyValue.map((nestCarKeyValue) => (
-          <li key={nestCarKeyValue} style={{ "list-style-type": "none" }}>
-            {nestCarKeyValue}
-          </li>
-        ))}
-      </div> */}
       </body>
     </>
   );
@@ -235,13 +213,10 @@ const EntityInfo = ({
 
 export default function Car() {
   const [carEntityTitleState, setCarEntityTitleState] = useState([]);
-  //const [carKeyState, setCarKeyState] = useState([]);
   const [nestedCarKeyState, setNestedCarKeyState] = useState([]);
   const [nestedCarKeyValuesState, setNestedCarKeyValuesState] = useState([]);
   const [carLicenseState, setCarLicenseState] = useState([]);
   const [carLicenseValueState, setCarLicenseValueState] = useState([]);
-
-  // ... other state variables
 
   useEffect(() => {
     const fetchData = async () => {
